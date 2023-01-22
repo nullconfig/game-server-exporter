@@ -7,7 +7,7 @@ python -m build
 ```
 Install the exporter globally
 ```bash
-sudo pip install dist/game_server_exporter-0.0.1.tar.gz
+sudo pip install dist/game_server_exporter-0.0.1-py3-none-any.whl
 ```
 
 Running the exporter as a systemd service
@@ -21,8 +21,7 @@ Requires=docker.service
 TimeoutStartSec=0
 Restart=always
 User=root
-ExecStart=game-server-exporter --container steamcmd \
---address x.x.x.x --port 8888 --metric-name game_server --metrics-endpoint 9103
+ExecStart=game-server-exporter --container steamcmd --address 127.0.0.1 --port 8888 --metric-name game_server --metrics-endpoint 9103
 
 [Install]
 WantedBy=multi-user.target

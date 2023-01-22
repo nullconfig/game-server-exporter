@@ -13,15 +13,19 @@ class GameServerMetrics:
 
     def get_container_status(self):
         status = subprocess.check_output("docker ps -a| grep " + self.container + " | awk '{print $8}'",
-                                        shell=True,
-                                        stderr=subprocess.STDOUT).decode("utf-8").strip()
+                                         shell=True,
+                                         stderr=subprocess.STDOUT).decode("utf-8").strip()
         if 'Up' in status:
             return 0
         else:
             return 1
 
     def get_player_count(self):
-        return len(a2s.players(self.address))
+        try:
+            return len(a2s.players(self.address))
+        except:
+            pass
+            return 0
 
     def get_server_info(self):
         try:
